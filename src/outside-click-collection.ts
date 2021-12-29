@@ -1,6 +1,6 @@
 import OutsideClick from "./outside-click";
 
-export default class OutsideClickCollection {
+export default abstract class OutsideClickCollection {
     private items: Array<OutsideClick> = [];
     private registeredEvents: boolean = false;
 
