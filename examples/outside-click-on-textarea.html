@@ -21,7 +21,7 @@
     <script src="../dist/outside-click.js"></script>
     <script>
         window.addEventListener('load', function () {
-            OutsideClick().add('#example', () => {
+            outsideClick.add('#example', () => {
                 document.querySelector('#example').style.background = 'white';
             }, () => {
                 document.querySelector('#example').style.background = 'blue';
