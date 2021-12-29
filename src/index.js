@@ -40,28 +40,25 @@ function handleClickOndocument(event) {
 }
 
 function registerClickOnDocument() {
-    document.addEventListener('click', (event) => handleClickOndocument(event));
+    if (started) {
+        return;
+    }
+    started = true;
+    document && document.addEventListener('click', (event) => handleClickOndocument(event));
 }
 
-export default function () {
-    if (!started) {
-        started = true;
-        registerClickOnDocument();
+export function add(element, clickOutMethod = null, clickInMethod = null) {
+    registerClickOnDocument();
+    let finalElement = null;
+    if (typeof element === 'string') {
+        finalElement = generateElementFromString(element);
+    } else if (element instanceof Element || element instanceof Document) {
+        finalElement = element;
     }
-    return {
-        add(element, clickOutMethod = null, clickInMethod = null) {
-            let finalElement = null;
-            if (typeof element === 'string') {
-                finalElement = generateElementFromString(element);
-            } else if (element instanceof Element || element instanceof Document) {
-                finalElement = element;
-            }
-            items.push({
-                element: finalElement,
-                clickOutMethod: clickOutMethod,
-                clickInMethod: clickInMethod,
-            });
-        },
-    };
+    items.push({
+        element: finalElement,
+        clickOutMethod: clickOutMethod,
+        clickInMethod: clickInMethod,
+    });
 };
 
