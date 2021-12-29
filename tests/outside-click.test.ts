@@ -33,31 +33,37 @@ class OutsideClick {
     }
 }
 
+const makeSut = (): OutsideClick => {
+    const elmDiv = document.createElement('div');
+    window.document.body.appendChild(elmDiv);
+
+    return new OutsideClick('div');
+}
+
+const makeSutPanel = (): OutsideClick => {
+    const elmPanel = document.createElement('div');
+    return new OutsideClick(elmPanel);
+}
+
 describe('Outside click', () => {
     beforeEach(() => {
         document.body.innerHTML = '';
     });
 
     test('ensure it can receive a HTML Element in contructor', () => {
-        const elmPanel = document.createElement('div');
-
-        const outsideClick = new OutsideClick(elmPanel);
+        const outsideClick = makeSutPanel();
 
         expect(outsideClick).toBeInstanceOf(OutsideClick);
     });
 
     test('ensure it can receive a string on contructor', () => {
-        window.document.body.appendChild(document.createElement('div'));
-
-        const outsideClick = new OutsideClick('div');
+        const outsideClick = makeSut();
 
         expect(outsideClick).toBeInstanceOf(OutsideClick);
     });
 
     test('ensure it can transform the string on HTML Element on constructor', () => {
-        window.document.body.appendChild(document.createElement('div'));
-
-        const outsideClick = new OutsideClick('div');
+        const outsideClick = makeSut();
         const element = outsideClick.getElement();
 
         expect(element).toBeInstanceOf(HTMLDivElement);
@@ -70,10 +76,8 @@ describe('Outside click', () => {
     });
 
     test('ensure can create an instance from a static method', () => {
-        window.document.body.appendChild(document.createElement('div'));
-
-        const outsideClick = OutsideClick.create('div');
-        const element = OutsideClick.create('div').getElement();
+        const outsideClick = makeSut();
+        const element = outsideClick.getElement();
 
         expect(outsideClick).toBeInstanceOf(OutsideClick);
         expect(element).toBeInstanceOf(HTMLDivElement);
