@@ -1,4 +1,5 @@
-import OutsideClickCollection from "../src/outside-click-collection";
+import ElementNotFoundError from "./errors/element-not-found-error";
+import OutsideClickCollection from "./outside-click-collection";
 
 export default class OutsideClick extends OutsideClickCollection {
     private element: Element|null = null;

@@ -1,4 +1,4 @@
-import OutsideClick from "../tests/outside-click";
+import OutsideClick from "./outside-click";
 
 export default class OutsideClickCollection {
     private items: Array<OutsideClick> = [];
