@@ -2,6 +2,13 @@
  * @jest-environment jsdom
  */
 
+class ElementNotFoundError extends Error {
+    constructor() {
+        super('Element not found');
+        this.name = 'ElementNotFoundError';
+    }
+}
+
 class OutsideClick {
     private element: Element|null = null;
 
@@ -12,7 +19,7 @@ class OutsideClick {
     private setElement(element: string | Element) {
         const domElement = typeof element === 'string' ? document.querySelector(element) : element;
         if (!domElement) {
-            throw new Error('Error when trying to set element');
+            throw new ElementNotFoundError();
         }
         this.element = domElement;
     }
@@ -57,6 +64,6 @@ describe('Outside click', () => {
     test('ensure it throws when an inexistent element has been passed', () => {
         const elmName = 'div';
 
-        expect(() => new OutsideClick(elmName)).toThrow();
+        expect(() => new OutsideClick(elmName)).toThrowError(ElementNotFoundError);
     });
 });
