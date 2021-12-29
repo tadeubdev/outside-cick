@@ -1,6 +1,6 @@
 {
   "name": "@teedmaker/outside-click",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple project to help you to use outside-click in your javascript project",
   "main": "stc/index.js",
   "scripts": {
