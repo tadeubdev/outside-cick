@@ -8,18 +8,23 @@ A simple package to help identifying a outside click of an element
 
 Dispatch an alert when user clicks outside of an element with the id `click-me`:
 
-```js
-outsideClick.add('#click-me', () => {
-    alert('Outside click!');
-});
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <main role="main">
+        <textarea
+            name="example"
+            id="example"
+            placeholder="Click on another element on the page"
+        ></textarea>
+    </main>
+    <script defer>
+        OutsideClick.create('#example').trigger(() => {
+            document.querySelector('#example').style.background = 'red';
+        });
+    </script>
+</body>
+</html>
 ```
 
-Dispatch an alert when user clicks outside and when the user clicks inside of an element with the id `click-me`
-
-```js
-outsideClick.add('#click-me', () => {
-    alert('Outside click!');
-}, () => {
-    alert('Inside click!');
-});
-```
