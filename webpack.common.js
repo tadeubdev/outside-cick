@@ -1,13 +1,17 @@
+const path = require('path');
+
 module.exports = {
-    mode: 'development',
-    entry: './src/index.js',
+    entry: {
+        app: './src/index.js',
+    },
     output: {
-        filename: './outside-click.js',
+        filename: 'outside-click.js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true,
         libraryTarget: 'window',
         libraryExport: 'default',
         library: 'OutsideClick',
     },
-    watch: true,
     module: {
         rules: [
             {
@@ -23,3 +27,4 @@ module.exports = {
         ]
     }
 };
+
