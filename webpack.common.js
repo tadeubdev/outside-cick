@@ -7,7 +7,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'outside-click.js',
-        library: 'outsideClick',
+        library: 'OutsideClick',
+        libraryTarget: 'window',
+        libraryExport: 'default',
+    },
+    resolve: {
+        extensions: [ '.ts', '.js' ],
     },
     module: {
         rules: [
@@ -20,6 +25,11 @@ module.exports = {
                         presets: ['env']
                     }
                 }
+            },
+            {
+                test: /\.tsx?/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             }
         ]
     }
