@@ -6,11 +6,13 @@
   "scripts": {
     "start": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "test": "jest"
+    "test": "jest",
+    "release": "./node_modules/bin/np"
   },
   "author": "Tadeu Barbosa <tadeufbarbosa@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "np": "*",
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
     "ts-jest": "^27.1.2",
