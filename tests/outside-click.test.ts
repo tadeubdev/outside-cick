@@ -55,23 +55,14 @@ describe('Outside click', () => {
         expect(element).toBeInstanceOf(HTMLDivElement);
     });
 
-    test('ensure can dispatch a action when document click has been trigged', () => {
+    test('ensure it can trigger the method when clicked', () => {
         const outsideClick = makeSut();
-        const spy = jest.spyOn(outsideClick, 'dispatch');
+        const spy = jest.spyOn(outsideClick, 'trigger');
+        outsideClick.trigger(() => {});
 
+        // @ts-ignore
         document.body.click();
 
         expect(spy).toHaveBeenCalled();
-    });
-
-    test('ensure it dont dispatch if itself was clicked', () => {
-        const outsideClick = makeSut();
-        const spy = jest.spyOn(outsideClick, 'dispatch');
-        const element = outsideClick.getElement();
-
-        // @ts-ignore
-        element.click();
-
-        expect(spy).not.toHaveBeenCalled();
     });
 });

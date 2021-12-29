@@ -22,7 +22,7 @@ export default class OutsideClick extends OutsideClickCollection {
         return this.element;
     }
 
-    dispatch() {
-        //
+    trigger(trigger: CallableFunction) {
+        this.setTrigger(trigger);
     }
 }
