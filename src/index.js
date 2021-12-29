@@ -5,6 +5,16 @@ function generateElementFromString(element) {
     return document.querySelector(element);
 }
 
+function mountElementBeforeAdd(element) {
+    if (typeof element === 'string') {
+        return generateElementFromString(element);
+    }
+    if (element instanceof Element || element instanceof Document) {
+        return element;
+    }
+    throw new Error('Element must be a string or a DOM element');
+}
+
 function getParentsElements(element, parents) {
     parents = parents || [element];
     const parent = element.parentElement;
@@ -49,16 +59,7 @@ function registerClickOnDocument() {
 
 export function add(element, clickOutMethod = null, clickInMethod = null) {
     registerClickOnDocument();
-    let finalElement = null;
-    if (typeof element === 'string') {
-        finalElement = generateElementFromString(element);
-    } else if (element instanceof Element || element instanceof Document) {
-        finalElement = element;
-    }
-    items.push({
-        element: finalElement,
-        clickOutMethod: clickOutMethod,
-        clickInMethod: clickInMethod,
-    });
+    element = mountElementBeforeAdd(element);
+    items.push({ element, clickOutMethod, clickInMethod });
 };
 
