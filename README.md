@@ -9,7 +9,7 @@ A simple package to help identifying a outside click of an element
 Dispatch an alert when user clicks outside of an element with the id `click-me`:
 
 ```js
-OutsideClick().add('#click-me', () => {
+outsideClick.add('#click-me', () => {
     alert('Outside click!');
 });
 ```
@@ -17,7 +17,7 @@ OutsideClick().add('#click-me', () => {
 Dispatch an alert when user clicks outside and when the user clicks inside of an element with the id `click-me`
 
 ```js
-OutsideClick().add('#click-me', () => {
+outsideClick.add('#click-me', () => {
     alert('Outside click!');
 }, () => {
     alert('Inside click!');
