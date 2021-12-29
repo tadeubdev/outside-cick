@@ -5,12 +5,9 @@ module.exports = {
         app: './src/index.js',
     },
     output: {
-        filename: 'outside-click.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
-        libraryTarget: 'window',
-        libraryExport: 'default',
-        library: 'OutsideClick',
+        filename: 'outside-click.js',
+        library: 'outsideClick',
     },
     module: {
         rules: [
