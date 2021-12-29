@@ -21,10 +21,8 @@
     <script src="../dist/outside-click.js"></script>
     <script>
         window.addEventListener('load', function () {
-            outsideClick.add('#example', () => {
-                document.querySelector('#example').style.background = 'white';
-            }, () => {
-                document.querySelector('#example').style.background = 'blue';
+            OutsideClick.create('#example').trigger(() => {
+                document.querySelector('#example').style.background = 'red';
             });
         });
     </script>
