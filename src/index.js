@@ -15,6 +15,10 @@ function mountElementBeforeAdd(element) {
     throw new Error('Element must be a string or a DOM element');
 }
 
+function addNewItem({ element, clickOutMethod, clickInMethod }) {
+    items.push({ element, clickOutMethod, clickInMethod });
+}
+
 function getParentsElements(element, parents) {
     parents = parents || [element];
     const parent = element.parentElement;
@@ -60,6 +64,6 @@ function registerClickOnDocument() {
 export function add(element, clickOutMethod = null, clickInMethod = null) {
     registerClickOnDocument();
     element = mountElementBeforeAdd(element);
-    items.push({ element, clickOutMethod, clickInMethod });
+    addNewItem({ element, clickOutMethod, clickInMethod });
 };
 
