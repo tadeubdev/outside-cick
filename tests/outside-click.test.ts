@@ -53,4 +53,10 @@ describe('Outside click', () => {
 
         expect(element).toBeInstanceOf(HTMLDivElement);
     });
+
+    test('ensure it throws when an inexistent element has been passed', () => {
+        const elmName = 'div';
+
+        expect(() => new OutsideClick(elmName)).toThrow();
+    });
 });
