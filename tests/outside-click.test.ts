@@ -16,6 +16,10 @@ class OutsideClick {
         this.setElement(element);
     }
 
+    static create(element: Element|string) {
+        return new this(element);
+    }
+
     private setElement(element: string | Element) {
         const domElement = typeof element === 'string' ? document.querySelector(element) : element;
         if (!domElement) {
@@ -44,18 +48,16 @@ describe('Outside click', () => {
 
     test('ensure it can receive a string on contructor', () => {
         window.document.body.appendChild(document.createElement('div'));
-        const elmName = 'div';
 
-        const outsideClick = new OutsideClick(elmName);
+        const outsideClick = new OutsideClick('div');
 
         expect(outsideClick).toBeInstanceOf(OutsideClick);
     });
 
     test('ensure it can transform the string on HTML Element on constructor', () => {
         window.document.body.appendChild(document.createElement('div'));
-        const elmName = 'div';
 
-        const outsideClick = new OutsideClick(elmName);
+        const outsideClick = new OutsideClick('div');
         const element = outsideClick.getElement();
 
         expect(element).toBeInstanceOf(HTMLDivElement);
@@ -65,5 +67,15 @@ describe('Outside click', () => {
         const elmName = 'div';
 
         expect(() => new OutsideClick(elmName)).toThrowError(ElementNotFoundError);
+    });
+
+    test('ensure can create an instance from a static method', () => {
+        window.document.body.appendChild(document.createElement('div'));
+
+        const outsideClick = OutsideClick.create('div');
+        const element = OutsideClick.create('div').getElement();
+
+        expect(outsideClick).toBeInstanceOf(OutsideClick);
+        expect(element).toBeInstanceOf(HTMLDivElement);
     });
 });
