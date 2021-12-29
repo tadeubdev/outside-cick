@@ -2,36 +2,8 @@
  * @jest-environment jsdom
  */
 
-class ElementNotFoundError extends Error {
-    constructor() {
-        super('Element not found');
-        this.name = 'ElementNotFoundError';
-    }
-}
-
-class OutsideClick {
-    private element: Element|null = null;
-
-    constructor(element: Element|string) {
-        this.setElement(element);
-    }
-
-    static create(element: Element|string) {
-        return new this(element);
-    }
-
-    private setElement(element: string | Element) {
-        const domElement = typeof element === 'string' ? document.querySelector(element) : element;
-        if (!domElement) {
-            throw new ElementNotFoundError();
-        }
-        this.element = domElement;
-    }
-
-    getElement(): Element|null {
-        return this.element;
-    }
-}
+import ElementNotFoundError from "../src/errors/element-not-found-error";
+import OutsideClick from "../src/outside-click";
 
 const makeSut = (): OutsideClick => {
     const elmDiv = document.createElement('div');
@@ -81,5 +53,25 @@ describe('Outside click', () => {
 
         expect(outsideClick).toBeInstanceOf(OutsideClick);
         expect(element).toBeInstanceOf(HTMLDivElement);
+    });
+
+    test('ensure can dispatch a action when document click has been trigged', () => {
+        const outsideClick = makeSut();
+        const spy = jest.spyOn(outsideClick, 'dispatch');
+
+        document.body.click();
+
+        expect(spy).toHaveBeenCalled();
+    });
+
+    test('ensure it dont dispatch if itself was clicked', () => {
+        const outsideClick = makeSut();
+        const spy = jest.spyOn(outsideClick, 'dispatch');
+        const element = outsideClick.getElement();
+
+        // @ts-ignore
+        element.click();
+
+        expect(spy).not.toHaveBeenCalled();
     });
 });

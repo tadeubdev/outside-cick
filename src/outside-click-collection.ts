@@ -22,8 +22,22 @@ export default abstract class OutsideClickCollection {
     }
 
     private handleDocumentClick(event: MouseEvent) {
-        for (let item of this.items) {
-            item.dispatch();
+        const parentsElements = this.getParentsElements(event.target as Element);
+        const items = this.items.filter(item => item.getElement());
+        const nonClickedItems = items.filter(item => {
+            return parentsElements.includes(item.getElement()) === false;
+        });
+        nonClickedItems.forEach(item => item.dispatch());
+    }
+
+    private getParentsElements(element: Element, parents: Array<Element>|null = null): Array<Element> {
+        parents = parents || [element];
+        const parent = element.parentElement;
+        if (parent) {
+            parents.push(parent);
+            return this.getParentsElements(parent, parents);
         }
+        return parents;
     }
 }
+
